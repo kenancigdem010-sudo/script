@@ -1038,22 +1038,29 @@ else
                                                                                                             root.CFrame = CFrame.new(-157.12, 50.91, -105.40)
                                                                                                             task.wait(0.5)
 
-                                                                                                            local shop = workspace.Ignored.Shop
-                                                                                                            local found = false
+                                                                                                            local shop = workspace:FindFirstChild("Ignored") and workspace.Ignored:FindFirstChild("Shop")
+                                                                                                            if shop then
+                                                                                                                local found = false
 
-                                                                                                            for _, item in pairs(shop:GetChildren()) do
-                                                                                                                if string.lower(item.Name):find("flamethrower") and not string.lower(item.Name):find("ammo") then
-                                                                                                                     for _, desc in pairs(item:GetDescendants()) do
-                                                                                                                        if desc:IsA("ClickDetector") then
-                                                                                                                            fireclickdetector(desc)
-                                                                                                                             found = true
-                                                                                                                             print("Flamethrower purchased! 🔥 ($9835)")
-                                                                                                                              break
+                                                                                                                for _, item in pairs(shop:GetChildren()) do
+                                                                                                                    if string.lower(item.Name):find("flamethrower") and not string.lower(item.Name):find("ammo") then
+                                                                                                                         for _, desc in pairs(item:GetDescendants()) do
+                                                                                                                            if desc:IsA("ClickDetector") then
+                                                                                                                                fireclickdetector(desc)
+                                                                                                                                 found = true
+                                                                                                                                 print("Flamethrower purchased! 🔥 ($9835)")
+                                                                                                                                  break
+                                                                                                                            end
+                                                                                                                         end
+                                                                                                                         if found then break end
                                                                                                                         end
-                                                                                                                     end
-                                                                                                                     if found then break end
-                                                                                                                    end
-                                                                                                                end;
+                                                                                                                    end;
+                                                                                                                if not found then
+                                                                                                                    warn("Flamethrower shop not found - check if you're in the right server/area!")
+                                                                                                                end
+                                                                                                            else
+                                                                                                                warn("Shop location not found!")
+                                                                                                            end
                                                                                                         end);
                                                                                                         v247 = true;
                                                                                                 end;
