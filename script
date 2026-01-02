@@ -290,6 +290,11 @@ else
             l_RBXGeneral_0:SendAsync(v95);
         end;
     end;
+    fireclickdetector = function(detector) --[[ Line: 0 ]] --[[ Name:  ]]
+        if detector then
+            detector:Fire();
+        end;
+    end;
     local _ = 10;
     startFollowingTarget = function(v97) --[[ Line: 0 ]] --[[ Name:  ]]
         -- upvalues: v76 (ref)
