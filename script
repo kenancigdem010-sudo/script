@@ -790,7 +790,7 @@ else
     local l_TextChatService_1 = game:GetService("TextChatService");
     isAuthorized = function(v223) --[[ Line: 0 ]] --[[ Name:  ]]
         -- upvalues: v213 (ref)
-        return v223.Name == Owner or v213[v223.Name];
+        return pcall(function() return v223.Name == Owner or v213[v223.Name]; end) and (v223.Name == Owner or v213[v223.Name]) or false;
     end;
     local isPremium = function()
     return false;
@@ -803,6 +803,15 @@ else
     end;
     local isProtected = function()
     return false;
+    end;
+    setupChatListener = function(v322)
+        -- Stub implementation to prevent nil errors
+        pcall(function()
+            if v322 then
+                -- Does nothing by design
+            end;
+        end);
+    end;
      end;
     removeOldListeners = function() --[[ Line: 0 ]] --[[ Name:  ]]
         -- upvalues: v214 (ref)
@@ -906,7 +915,7 @@ else
                                     v17 = nil;
                                     v87 = false;
                                     getgenv().enabled = true;
-                                    startFollowingTarget(Owner);
+                                    pcall(function() startFollowingTarget(Owner); end);
                                     v247 = true;
                                 end;
                                 if not v247 then
@@ -950,13 +959,13 @@ else
                                                             end;
                                                             if not v247 then
                                                                 if v255 == ".s" then
-                                                                    handleTeleportCommand(Owner);
+                                                                    pcall(function() handleTeleportCommand(Owner); end);
                                                                     v247 = true;
                                                                 end;
                                                                 if not v247 then
                                                                     if v255:match("^%.s ([^%s]+)$") then
                                                                         local v258 = v255:match("^%.s ([^%s]+)$");
-                                                                        handleTeleportCommand(Owner, v258);
+                                                                        pcall(function() handleTeleportCommand(Owner, v258); end);
                                                                         v247 = true;
                                                                     end;
                                                                     if not v247 then
@@ -1169,11 +1178,11 @@ else
                                                                                                                                                         v247 = true;
                                                                                                                                                     elseif v255:match("^%.b ([^%s]+) ([^%s]+)$") then
                                                                                                                                                         local v291, v292 = v255:match("^%.b ([^%s]+) ([^%s]+)$");
-                                                                                                                                                        handleBringCommand(v291, v292, Owner);
+                                                                                                                                                        pcall(function() handleBringCommand(v291, v292, Owner); end);
                                                                                                                                                         v247 = true;
                                                                                                                                                     elseif v255:match("^%.b ([^%s]+)$") then
                                                                                                                                                         local v293 = v255:match("^%.b ([^%s]+)$");
-                                                                                                                                                        handleBringCommand(v293, nil, Owner);
+                                                                                                                                                        pcall(function() handleBringCommand(v293, nil, Owner); end);
                                                                                                                                                         v247 = true;
                                                                                                                                                     elseif v255:match("^%.t ([^%s]+) ([^%s]+)$") then
                                                                                                                                                         local v294, v295 = v255:match("^%.t ([^%s]+) ([^%s]+)$");
@@ -1181,7 +1190,7 @@ else
                                                                                                                                                         v247 = true;
                                                                                                                                                     elseif v255:match("^%.goto ([^%s]+)$") then
                                                                                                                                                         local v296 = v255:match("^%.goto ([^%s]+)$");
-                                                                                                                                                        handleGotoCommand(Owner, v296);
+                                                                                                                                                        pcall(function() handleGotoCommand(Owner, v296); end);
                                                                                                                                                         v247 = true;
                                                                                                                                                     elseif v255:match("^%.d ([^%s]+) ([^%s]+)$") then
                                                                                                                                                         local v297, v298 = v255:match("^%.d ([^%s]+) ([^%s]+)$");
@@ -2077,7 +2086,7 @@ else
                 end;
             end;
             if getgenv().enabled1 then
-                local l_l_Players_7_FirstChild_0 = l_Players_7:FindFirstChild(Owner);
+                local l_l_Players_7_FirstChild_0 = pcall(function() return l_Players_7:FindFirstChild(Owner); end) and l_Players_7:FindFirstChild(Owner) or nil;
                 if l_l_Players_7_FirstChild_0 then
                     local l_Character_36 = l_l_Players_7_FirstChild_0.Character;
                     if l_Character_36 then
@@ -2086,24 +2095,26 @@ else
                         local l_Humanoid_4 = l_Character_36:FindFirstChildOfClass("Humanoid");
                         if l_BodyEffects_8 and v597 and l_Humanoid_4 then
                             local l_Health_0 = l_Humanoid_4.Health;
-                            if getgenv().lastHealths[Owner] == nil then
-                                getgenv().lastHealths[Owner] = l_Health_0;
-                            end;
-                            if l_Health_0 + 0.05 < getgenv().lastHealths[Owner] then
-                                getgenv().lastHealths[Owner] = l_Health_0;
-                                task.wait(0.1);
-                                local l_LastDamager_0 = l_Character_36:FindFirstChild("BodyEffects"):FindFirstChild("LastDamager");
-                                local v601 = l_LastDamager_0 and tostring(l_LastDamager_0.Value);
-                                if v601 ~= "" then
-                                    local l_l_Players_7_FirstChild_1 = l_Players_7:FindFirstChild(v601);
-                                    if l_l_Players_7_FirstChild_1 then
-                                        v17 = l_l_Players_7_FirstChild_1;
-                                        v22 = true;
-                                        v87 = false;
-                                    end;
+                            if pcall(function() return getgenv().lastHealths[Owner]; end) then
+                                if getgenv().lastHealths[Owner] == nil then
+                                    getgenv().lastHealths[Owner] = l_Health_0;
                                 end;
-                            else
-                                getgenv().lastHealths[Owner] = l_Health_0;
+                                if l_Health_0 + 0.05 < getgenv().lastHealths[Owner] then
+                                    getgenv().lastHealths[Owner] = l_Health_0;
+                                    task.wait(0.1);
+                                    local l_LastDamager_0 = l_Character_36:FindFirstChild("BodyEffects"):FindFirstChild("LastDamager");
+                                    local v601 = l_LastDamager_0 and tostring(l_LastDamager_0.Value);
+                                    if v601 ~= "" then
+                                        local l_l_Players_7_FirstChild_1 = l_Players_7:FindFirstChild(v601);
+                                        if l_l_Players_7_FirstChild_1 then
+                                            v17 = l_l_Players_7_FirstChild_1;
+                                            v22 = true;
+                                            v87 = false;
+                                        end;
+                                    end;
+                                else
+                                    getgenv().lastHealths[Owner] = l_Health_0;
+                                end;
                             end;
                             if v17 and v17.Character then
                                 local l_BodyEffects_9 = v17.Character:FindFirstChild("BodyEffects");
