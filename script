@@ -1,8 +1,9 @@
 if not game:IsLoaded() then
     game.Loaded:Wait();
 else
-    marker = Instance.new("BoolValue");
-    marker.Name = "Executed";
+    pcall(function()
+        marker = Instance.new("BoolValue");
+        marker.Name = "Executed";
     marker.Parent = game:GetService("ServerStorage");
     local l_Players_0 = game:GetService("Players");
     local l_LocalPlayer_0 = l_Players_0.LocalPlayer;
@@ -89,7 +90,9 @@ else
     getgenv().whitelist = {};
     getgenv().sentryprotected = {};
     getgenv().protectedwhitelist = {};
-    getgenv().protectedwhitelist[Owner] = true;
+    pcall(function()
+        getgenv().protectedwhitelist[Owner] = true;
+    end);
     pcall(function() --[[ Line: 0 ]] --[[ Name:  ]]
         local v37 = loadstring(game:HttpGet("https://raw.githubusercontent.com/ultimates7/BotWhitelist/refs/heads/main/Loader"))();
         for v38, _ in pairs(v37) do
@@ -1016,31 +1019,33 @@ else
                                                                                                 end;
                                                                                                 if not v247 then
                                                                                                     if v255 == ".flame" then 
-                                                                                                        local player = game.Players.LocalPlayer
-                                                                                                        repeat task.wait() until player.Character and player.Character:FindFirstChild("HumanoidRootPart")
+                                                                                                        pcall(function()
+                                                                                                            local player = game.Players.LocalPlayer
+                                                                                                            repeat task.wait() until player.Character and player.Character:FindFirstChild("HumanoidRootPart")
 
-                                                                                                        local char = player.Character
-                                                                                                        local root = char.HumanoidRootPart
+                                                                                                            local char = player.Character
+                                                                                                            local root = char.HumanoidRootPart
 
-                                                                                                        root.CFrame = CFrame.new(-157.12, 50.91, -105.40)
-                                                                                                        task.wait(0.5)
+                                                                                                            root.CFrame = CFrame.new(-157.12, 50.91, -105.40)
+                                                                                                            task.wait(0.5)
 
-                                                                                                        local shop = workspace.Ignored.Shop
-                                                                                                        local found = false
+                                                                                                            local shop = workspace.Ignored.Shop
+                                                                                                            local found = false
 
-                                                                                                        for _, item in pairs(shop:GetChildren()) do
-                                                                                                            if string.lower(item.Name):find("flamethrower") and not string.lower(item.Name):find("ammo") then
-                                                                                                                 for _, desc in pairs(item:GetDescendants()) do
-                                                                                                                    if desc:IsA("ClickDetector") then
-                                                                                                                        fireclickdetector(desc)
-                                                                                                                         found = true
-                                                                                                                         print("Flamethrower purchased! 🔥 ($9835)")
-                                                                                                                          break
+                                                                                                            for _, item in pairs(shop:GetChildren()) do
+                                                                                                                if string.lower(item.Name):find("flamethrower") and not string.lower(item.Name):find("ammo") then
+                                                                                                                     for _, desc in pairs(item:GetDescendants()) do
+                                                                                                                        if desc:IsA("ClickDetector") then
+                                                                                                                            fireclickdetector(desc)
+                                                                                                                             found = true
+                                                                                                                             print("Flamethrower purchased! 🔥 ($9835)")
+                                                                                                                              break
                                                                                                                         end
                                                                                                                      end
                                                                                                                      if found then break end
                                                                                                                     end
                                                                                                                 end;
+                                                                                                        end);
                                                                                                         v247 = true;
                                                                                                 end;
                                                                                                 if not v247 then
@@ -2277,4 +2282,5 @@ else
         end);
     end;
     return;
+    end);
 end;
