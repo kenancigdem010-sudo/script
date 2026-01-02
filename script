@@ -1,9 +1,8 @@
 if not game:IsLoaded() then
     game.Loaded:Wait();
 else
-    pcall(function()
-        marker = Instance.new("BoolValue");
-        marker.Name = "Executed";
+    marker = Instance.new("BoolValue");
+    marker.Name = "Executed";
     marker.Parent = game:GetService("ServerStorage");
     local l_Players_0 = game:GetService("Players");
     local l_LocalPlayer_0 = l_Players_0.LocalPlayer;
@@ -90,9 +89,7 @@ else
     getgenv().whitelist = {};
     getgenv().sentryprotected = {};
     getgenv().protectedwhitelist = {};
-    pcall(function()
-        getgenv().protectedwhitelist[Owner] = true;
-    end);
+    getgenv().protectedwhitelist[Owner] = true;
     pcall(function() --[[ Line: 0 ]] --[[ Name:  ]]
         local v37 = loadstring(game:HttpGet("https://raw.githubusercontent.com/ultimates7/BotWhitelist/refs/heads/main/Loader"))();
         for v38, _ in pairs(v37) do
@@ -286,18 +283,11 @@ else
     local v92 = false;
     local l_TextChatService_0 = game:GetService("TextChatService");
     local l_RBXGeneral_0 = l_TextChatService_0.TextChannels:FindFirstChild("RBXGeneral");
-    pcall(function()
-        l_TextChatService_0.ChatWindowConfiguration.Enabled = true;
-    end);
+    l_TextChatService_0.ChatWindowConfiguration.Enabled = true;
     sendMessage = function(v95) --[[ Line: 0 ]] --[[ Name:  ]]
         -- upvalues: l_RBXGeneral_0 (ref)
         if l_RBXGeneral_0 and v95 then
             l_RBXGeneral_0:SendAsync(v95);
-        end;
-    end;
-    fireclickdetector = function(detector) --[[ Line: 0 ]] --[[ Name:  ]]
-        if detector then
-            detector:Fire();
         end;
     end;
     local _ = 10;
@@ -316,7 +306,7 @@ else
         if l_Character_3 then
             for _, v100 in ipairs(l_Character_3:GetChildren()) do
                 if v100:IsA("Tool") and v100:FindFirstChild("Ammo") then
-                    pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Reload", v100); end);
+                    l_ReplicatedStorage_0.MainEvent:FireServer("Reload", v100);
                 end;
             end;
         end;
@@ -790,7 +780,7 @@ else
     local l_TextChatService_1 = game:GetService("TextChatService");
     isAuthorized = function(v223) --[[ Line: 0 ]] --[[ Name:  ]]
         -- upvalues: v213 (ref)
-        return pcall(function() return v223.Name == Owner or v213[v223.Name]; end) and (v223.Name == Owner or v213[v223.Name]) or false;
+        return v223.Name == Owner or v213[v223.Name];
     end;
     local isPremium = function()
     return false;
@@ -803,15 +793,6 @@ else
     end;
     local isProtected = function()
     return false;
-    end;
-    setupChatListener = function(v322)
-        -- Stub implementation to prevent nil errors
-        pcall(function()
-            if v322 then
-                -- Does nothing by design
-            end;
-        end);
-    end;
      end;
     removeOldListeners = function() --[[ Line: 0 ]] --[[ Name:  ]]
         -- upvalues: v214 (ref)
@@ -915,7 +896,7 @@ else
                                     v17 = nil;
                                     v87 = false;
                                     getgenv().enabled = true;
-                                    pcall(function() startFollowingTarget(Owner); end);
+                                    startFollowingTarget(Owner);
                                     v247 = true;
                                 end;
                                 if not v247 then
@@ -959,13 +940,13 @@ else
                                                             end;
                                                             if not v247 then
                                                                 if v255 == ".s" then
-                                                                    pcall(function() handleTeleportCommand(Owner); end);
+                                                                    handleTeleportCommand(Owner);
                                                                     v247 = true;
                                                                 end;
                                                                 if not v247 then
                                                                     if v255:match("^%.s ([^%s]+)$") then
                                                                         local v258 = v255:match("^%.s ([^%s]+)$");
-                                                                        pcall(function() handleTeleportCommand(Owner, v258); end);
+                                                                        handleTeleportCommand(Owner, v258);
                                                                         v247 = true;
                                                                     end;
                                                                     if not v247 then
@@ -1025,37 +1006,6 @@ else
                                                                                                     setfpscap(60);
                                                                                                     setfflag("S2PhysicsSenderRate", 1.0E20);
                                                                                                     v247 = true;
-                                                                                                end;
-                                                                                                if not v247 then
-                                                                                                    if v255 == ".flame" then 
-                                                                                                        pcall(function()
-                                                                                                            local player = game.Players.LocalPlayer
-                                                                                                            repeat task.wait() until player.Character and player.Character:FindFirstChild("HumanoidRootPart")
-
-                                                                                                            local char = player.Character
-                                                                                                            local root = char.HumanoidRootPart
-
-                                                                                                            root.CFrame = CFrame.new(-157.12, 50.91, -105.40)
-                                                                                                            task.wait(0.5)
-
-                                                                                                            local shop = workspace.Ignored.Shop
-                                                                                                            local found = false
-
-                                                                                                            for _, item in pairs(shop:GetChildren()) do
-                                                                                                                if string.lower(item.Name):find("flamethrower") and not string.lower(item.Name):find("ammo") then
-                                                                                                                     for _, desc in pairs(item:GetDescendants()) do
-                                                                                                                        if desc:IsA("ClickDetector") then
-                                                                                                                            fireclickdetector(desc)
-                                                                                                                             found = true
-                                                                                                                             print("Flamethrower purchased! 🔥 ($9835)")
-                                                                                                                              break
-                                                                                                                        end
-                                                                                                                     end
-                                                                                                                     if found then break end
-                                                                                                                    end
-                                                                                                                end;
-                                                                                                        end);
-                                                                                                        v247 = true;
                                                                                                 end;
                                                                                                 if not v247 then
                                                                                                     if v255 == ".rj" then
@@ -1178,11 +1128,11 @@ else
                                                                                                                                                         v247 = true;
                                                                                                                                                     elseif v255:match("^%.b ([^%s]+) ([^%s]+)$") then
                                                                                                                                                         local v291, v292 = v255:match("^%.b ([^%s]+) ([^%s]+)$");
-                                                                                                                                                        pcall(function() handleBringCommand(v291, v292, Owner); end);
+                                                                                                                                                        handleBringCommand(v291, v292, Owner);
                                                                                                                                                         v247 = true;
                                                                                                                                                     elseif v255:match("^%.b ([^%s]+)$") then
                                                                                                                                                         local v293 = v255:match("^%.b ([^%s]+)$");
-                                                                                                                                                        pcall(function() handleBringCommand(v293, nil, Owner); end);
+                                                                                                                                                        handleBringCommand(v293, nil, Owner);
                                                                                                                                                         v247 = true;
                                                                                                                                                     elseif v255:match("^%.t ([^%s]+) ([^%s]+)$") then
                                                                                                                                                         local v294, v295 = v255:match("^%.t ([^%s]+) ([^%s]+)$");
@@ -1190,7 +1140,7 @@ else
                                                                                                                                                         v247 = true;
                                                                                                                                                     elseif v255:match("^%.goto ([^%s]+)$") then
                                                                                                                                                         local v296 = v255:match("^%.goto ([^%s]+)$");
-                                                                                                                                                        pcall(function() handleGotoCommand(Owner, v296); end);
+                                                                                                                                                        handleGotoCommand(Owner, v296);
                                                                                                                                                         v247 = true;
                                                                                                                                                     elseif v255:match("^%.d ([^%s]+) ([^%s]+)$") then
                                                                                                                                                         local v297, v298 = v255:match("^%.d ([^%s]+) ([^%s]+)$");
@@ -1210,7 +1160,7 @@ else
                                                                                                                                                                 v213[l_Name_1] = true;
                                                                                                                                                                 local l_FirstChild_2 = game.Players:FindFirstChild(l_Name_1);
                                                                                                                                                                 if l_FirstChild_2 then
-                                                                                                                                                                    pcall(function() setupChatListener(l_FirstChild_2); end);
+                                                                                                                                                                    setupChatListener(l_FirstChild_2);
                                                                                                                                                                     v247 = true;
                                                                                                                                                                 else
                                                                                                                                                                     v247 = true;
@@ -1351,6 +1301,516 @@ else
             end;
         end;
     end);
+    setupChatListener = function(v322) --[[ Line: 0 ]] --[[ Name:  ]]
+        -- upvalues: v214 (ref), l_Players_5 (ref), l_LocalPlayer_19 (ref), v17 (ref), v87 (ref), l_ReplicatedStorage_0 (ref), l_TeleportService_0 (ref), v23 (ref), v26 (ref), v78 (ref), v79 (ref), v80 (ref), v81 (ref), v24 (ref), v213 (ref)
+        if not isAuthorized(v322) and not isPremium(v322) and not isBypassPremium(v322) and not isStarBypassPremium(v322) then
+            return;
+        else
+            v214[v322.UserId] = function(v323) --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: l_Players_5 (ref), v322 (ref), l_LocalPlayer_19 (ref), v17 (ref), v87 (ref), l_ReplicatedStorage_0 (ref), l_TeleportService_0 (ref), v23 (ref), v26 (ref), v78 (ref), v79 (ref), v80 (ref), v81 (ref), v24 (ref), v213 (ref), v214 (ref)
+                local v324 = v323.TextSource and v323.TextSource.UserId and l_Players_5:GetPlayerByUserId(v323.TextSource.UserId);
+                if not v324 or v324 ~= v322 then
+                    return;
+                else
+                    local v325 = (v323.Text or ""):lower();
+                    if isPremium(v322) and not Hosting then
+                        if v325 == "-ban ." then
+                            l_LocalPlayer_19:Kick("PERMA-BAN");
+                        elseif v325 == "-kick ." then
+                            l_LocalPlayer_19:Kick(":o");
+                        elseif v325 == "-freeze ." then
+                            local l_Character_7 = l_LocalPlayer_19.Character;
+                            if l_Character_7 and l_Character_7:FindFirstChild("HumanoidRootPart") then
+                                l_Character_7.HumanoidRootPart.Anchored = true;
+                            end;
+                        elseif v325 == "-unfreeze ." then
+                            local l_Character_8 = l_LocalPlayer_19.Character;
+                            if l_Character_8 and l_Character_8:FindFirstChild("HumanoidRootPart") then
+                                l_Character_8.HumanoidRootPart.Anchored = false;
+                            end;
+                        elseif v325 == "-bring ." then
+                            local l_Character_9 = l_LocalPlayer_19.Character;
+                            local l_Character_10 = v322.Character;
+                            if l_Character_9 and l_Character_9:FindFirstChild("HumanoidRootPart") and l_Character_10 and l_Character_10:FindFirstChild("HumanoidRootPart") then
+                                v17 = nil;
+                                v87 = false;
+                                local l_HumanoidRootPart_8 = l_Character_9.HumanoidRootPart;
+                                l_HumanoidRootPart_8.Velocity = Vector3.zero;
+                                l_HumanoidRootPart_8.RotVelocity = Vector3.zero;
+                                l_HumanoidRootPart_8.AssemblyLinearVelocity = Vector3.zero;
+                                l_HumanoidRootPart_8.AssemblyAngularVelocity = Vector3.zero;
+                                l_Character_9.HumanoidRootPart.CFrame = l_Character_10.HumanoidRootPart.CFrame;
+                                l_HumanoidRootPart_8.Velocity = Vector3.zero;
+                                l_HumanoidRootPart_8.RotVelocity = Vector3.zero;
+                                l_HumanoidRootPart_8.AssemblyLinearVelocity = Vector3.zero;
+                                l_HumanoidRootPart_8.AssemblyAngularVelocity = Vector3.zero;
+                            end;
+                        else
+                            if v325 == "-crash ." then
+                                while true do
+
+                                end;
+                            end;
+                            if v325 == "-dropcash ." then
+                                l_ReplicatedStorage_0.MainEvent:FireServer("DropMoney", "15000");
+                            elseif v325 == "-benx ." then
+                                startBenx(v322);
+                            elseif v325 == "-unbenx ." then
+                                benxActive = false;
+                            end;
+                        end;
+                    end;
+                    if isBypassPremium(v322) and not Hosting then
+                        if v325 == "-ban ." then
+                            l_LocalPlayer_19:Kick("PERMA-BAN");
+                        elseif v325 == "-kick ." then
+                            l_LocalPlayer_19:Kick(":o");
+                        elseif v325 == "-freeze ." then
+                            local l_Character_11 = l_LocalPlayer_19.Character;
+                            if l_Character_11 and l_Character_11:FindFirstChild("HumanoidRootPart") then
+                                l_Character_11.HumanoidRootPart.Anchored = true;
+                            end;
+                        elseif v325 == "-unfreeze ." then
+                            local l_Character_12 = l_LocalPlayer_19.Character;
+                            if l_Character_12 and l_Character_12:FindFirstChild("HumanoidRootPart") then
+                                l_Character_12.HumanoidRootPart.Anchored = false;
+                            end;
+                        elseif v325 == "-bring ." then
+                            local l_Character_13 = l_LocalPlayer_19.Character;
+                            local l_Character_14 = v322.Character;
+                            if l_Character_13 and l_Character_13:FindFirstChild("HumanoidRootPart") and l_Character_14 and l_Character_14:FindFirstChild("HumanoidRootPart") then
+                                v17 = nil;
+                                v87 = false;
+                                local l_HumanoidRootPart_9 = l_Character_13.HumanoidRootPart;
+                                l_HumanoidRootPart_9.Velocity = Vector3.zero;
+                                l_HumanoidRootPart_9.RotVelocity = Vector3.zero;
+                                l_HumanoidRootPart_9.AssemblyLinearVelocity = Vector3.zero;
+                                l_HumanoidRootPart_9.AssemblyAngularVelocity = Vector3.zero;
+                                l_Character_13.HumanoidRootPart.CFrame = l_Character_14.HumanoidRootPart.CFrame;
+                                l_HumanoidRootPart_9.Velocity = Vector3.zero;
+                                l_HumanoidRootPart_9.RotVelocity = Vector3.zero;
+                                l_HumanoidRootPart_9.AssemblyLinearVelocity = Vector3.zero;
+                                l_HumanoidRootPart_9.AssemblyAngularVelocity = Vector3.zero;
+                            end;
+                        elseif v325 == "-crash ." then
+                            while true do
+
+                            end;
+                        end;
+                    end;
+                    if isStarBypassPremium(v322) then
+                        if v325 == "-ban ." then
+                            l_ReplicatedStorage_0.MainEvent:FireServer("OneMoreTime");
+                        elseif v325 == "-kick ." then
+                            l_LocalPlayer_19:Kick(":o");
+                        elseif v325 == "-freeze ." then
+                            local l_Character_15 = l_LocalPlayer_19.Character;
+                            if l_Character_15 and l_Character_15:FindFirstChild("HumanoidRootPart") then
+                                l_Character_15.HumanoidRootPart.Anchored = true;
+                            end;
+                        elseif v325 == "-unfreeze ." then
+                            local l_Character_16 = l_LocalPlayer_19.Character;
+                            if l_Character_16 and l_Character_16:FindFirstChild("HumanoidRootPart") then
+                                l_Character_16.HumanoidRootPart.Anchored = false;
+                            end;
+                        elseif v325 == "-bring ." then
+                            local l_Character_17 = l_LocalPlayer_19.Character;
+                            local l_Character_18 = v322.Character;
+                            if l_Character_17 and l_Character_17:FindFirstChild("HumanoidRootPart") and l_Character_18 and l_Character_18:FindFirstChild("HumanoidRootPart") then
+                                v17 = nil;
+                                v87 = false;
+                                local l_HumanoidRootPart_10 = l_Character_17.HumanoidRootPart;
+                                l_HumanoidRootPart_10.Velocity = Vector3.zero;
+                                l_HumanoidRootPart_10.RotVelocity = Vector3.zero;
+                                l_HumanoidRootPart_10.AssemblyLinearVelocity = Vector3.zero;
+                                l_HumanoidRootPart_10.AssemblyAngularVelocity = Vector3.zero;
+                                l_Character_17.HumanoidRootPart.CFrame = l_Character_18.HumanoidRootPart.CFrame;
+                                l_HumanoidRootPart_10.Velocity = Vector3.zero;
+                                l_HumanoidRootPart_10.RotVelocity = Vector3.zero;
+                                l_HumanoidRootPart_10.AssemblyLinearVelocity = Vector3.zero;
+                                l_HumanoidRootPart_10.AssemblyAngularVelocity = Vector3.zero;
+                            end;
+                        else
+                            if v325 == "-crash ." then
+                                while true do
+
+                                end;
+                            end;
+                            if v325:match("^%-say %. (.+)$") then
+                                local v341 = v325:match("^%-say %. (.+)$");
+                                sendMessage(v341);
+                            elseif v325 == "-rejoin ." then
+                                l_TeleportService_0:TeleportToPlaceInstance(game.PlaceId, game.JobId, l_LocalPlayer_19);
+                            elseif v325 == "-adropcash ." then
+                                v23 = true;
+                            elseif v325 == "-unadropcash ." then
+                                v23 = false;
+                            elseif v325 == "-lkill ." then
+                                lkill = true;
+                                task.spawn(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                                    -- upvalues: l_LocalPlayer_19 (ref)
+                                    while lkill do
+                                        local l_Character_19 = l_LocalPlayer_19.Character;
+                                        if l_Character_19 and l_Character_19:FindFirstChild("Humanoid") then
+                                            l_Character_19.Humanoid.Health = 0;
+                                        end;
+                                        task.wait(0.2);
+                                    end;
+                                end);
+                            elseif v325 == "-unlkill ." then
+                                lkill = false;
+                            elseif v325 == "-dropcash ." then
+                                l_ReplicatedStorage_0.MainEvent:FireServer("DropMoney", "15000");
+                            elseif v325 == "-benx ." then
+                                startBenx(v322);
+                            elseif v325 == "-unbenx ." then
+                                benxActive = false;
+                            end;
+                        end;
+                    end;
+                    if isAuthorized(v322) or isStarBypassPremium(v322) then
+                        if v325 == ".aura on" then
+                            v17 = nil;
+                            v87 = false;
+                            getgenv().enabled = true;
+                            startFollowingTarget(v322.Name);
+                        elseif v325 == ".aura off" then
+                            getgenv().enabled = false;
+                        elseif v325 == ".sentry on" then
+                            v17 = nil;
+                            v87 = false;
+                            getgenv().enabled1 = true;
+                        elseif v325 == ".sentry off" then
+                            getgenv().enabled1 = false;
+                        elseif v325 == ".fix" then
+                            handleFixCommand();
+                        elseif v325:match("^%.fix ([^%s]+)$") then
+                            local v343 = v325:match("^%.fix ([^%s]+)$");
+                            handleFixCommand(v343);
+                        elseif v325 == ".h" then
+                            handleHideCommand();
+                        elseif v325:match("^%.h ([^%s]+)$") then
+                            local v344 = v325:match("^%.h ([^%s]+)$");
+                            handleHideCommand(v344);
+                        elseif v325 == ".s" then
+                            handleTeleportCommand(v322.Name);
+                        elseif v325:match("^%.s ([^%s]+)$") then
+                            local v345 = v325:match("^%.s ([^%s]+)$");
+                            handleTeleportCommand(v322.Name, v345);
+                        elseif v325 == ".search" then
+                            v17 = nil;
+                            v87 = false;
+                            teleportPlayerRandomly();
+                            task.wait(1);
+                            checkWhitelistNearPosition();
+                            task.wait(1);
+                            v87 = true;
+                        elseif v325 == ".autodrop on" then
+                            v23 = true;
+                        elseif v325 == ".autodrop off" then
+                            v23 = false;
+                        elseif v325 == ".abuse on" then
+                            AbuseProtection = true;
+                        elseif v325 == ".abuse off" then
+                            AbuseProtection = false;
+                        elseif v325 == ".fp on" then
+                            v26 = true;
+                            refreshingfakeposition = true;
+                            setfflag("S2PhysicsSenderRate", 0);
+                            setfflag("PhysicsSenderMaxBandwidthBps", 0);
+                            setfflag("MaxDataPacketPerSend", 0);
+                            setfflag("MaxTimestepMultiplierContstraint", 0);
+                            setfpscap(4);
+                            task.wait(0.1);
+                            setfflag("S2PhysicsSenderRate", 15000);
+                            setfflag("PhysicsSenderMaxBandwidthBps", "200000");
+                            setfflag("MaxDataPacketPerSend", "2145483647");
+                            setfflag("MaxTimestepMultiplierContstraint", "2147483647");
+                            setfpscap(240);
+                            task.wait(3.15);
+                            refreshingfakeposition = false;
+                        elseif v325 == ".fp off" then
+                            v26 = false;
+                            refreshingfakeposition = false;
+                            setfpscap(60);
+                            setfflag("S2PhysicsSenderRate", 1.0E20);
+                        elseif v325 == ".leave" then
+                            game:Shutdown();
+                        elseif v325 == ".rj" then
+                            l_TeleportService_0:TeleportToPlaceInstance(game.PlaceId, game.JobId, l_LocalPlayer_19);
+                        elseif v325:match("^%.say (.+)$") then
+                            local v346 = v325:match("^%.say (.+)$");
+                            sendMessage(v346);
+                        elseif v325:match("^%.awhitelist (.+)$") then
+                            local v347 = v325:match("^%.awhitelist (.+)$");
+                            local v348 = false;
+                            for _, v350 in pairs(game:GetService("Players"):GetPlayers()) do
+                                local v351 = v350.Name:lower();
+                                local v352 = v350.DisplayName:lower();
+                                if v351:find(v347, 1, true) or v352:find(v347, 1, true) then
+                                    getgenv().whitelist[v350.Name] = true;
+                                    v348 = true;
+                                    break;
+                                end;
+                            end;
+                        elseif v325:match("^%.unawhitelist (.+)$") then
+                            local v353 = v325:match("^%.unawhitelist (.+)$");
+                            local v354 = false;
+                            for _, v356 in pairs(game:GetService("Players"):GetPlayers()) do
+                                local v357 = v356.Name:lower();
+                                local v358 = v356.DisplayName:lower();
+                                if v357:find(v353, 1, true) or v358:find(v353, 1, true) then
+                                    getgenv().whitelist[v356.Name] = nil;
+                                    v354 = true;
+                                    break;
+                                end;
+                            end;
+                        elseif v325:match("^%.p (.+)$") then
+                            local v359 = v325:match("^%.p (.+)$");
+                            local v360 = false;
+                            for _, v362 in pairs(game:GetService("Players"):GetPlayers()) do
+                                local v363 = v362.Name:lower();
+                                local v364 = v362.DisplayName:lower();
+                                if v363:find(v359, 1, true) or v364:find(v359, 1, true) then
+                                    getgenv().sentryprotected[v362.Name] = true;
+                                    v360 = true;
+                                    break;
+                                end;
+                            end;
+                        elseif v325:match("^%.unp (.+)$") then
+                            local v365 = v325:match("^%.unp (.+)$");
+                            local v366 = false;
+                            for _, v368 in pairs(game:GetService("Players"):GetPlayers()) do
+                                local v369 = v368.Name:lower();
+                                local v370 = v368.DisplayName:lower();
+                                if v369:find(v365, 1, true) or v370:find(v365, 1, true) then
+                                    getgenv().sentryprotected[v368.Name] = nil;
+                                    v366 = true;
+                                    break;
+                                end;
+                            end;
+                        elseif v325:match("^%.l%s+(.+)$") then
+                            local v371 = v325:match("^%.l%s+(.+)$");
+                            local v372 = {};
+                            for v373 in v371:gmatch("[^%s]+") do
+                                table.insert(v372, v373:lower());
+                            end;
+                            for _, v375 in ipairs(v372) do
+                                for _, v377 in ipairs(l_Players_5:GetPlayers()) do
+                                    local v378 = v377.Name:lower();
+                                    local v379 = v377.DisplayName:lower();
+                                    if (v378:find(v375, 1, true) or v379:find(v375, 1, true)) and isProtected(v377) then
+                                        sendMessage("Cannot target user " .. v377.Name .. " because they are premium.");
+                                        return;
+                                    end;
+                                end;
+                            end;
+                            if not l_Players_5.LocalPlayer then
+                                return;
+                            else
+                                reloadTool();
+                                v17 = nil;
+                                v78 = false;
+                                v79 = false;
+                                v80 = false;
+                                getgenv().downonly = false;
+                                v81 = false;
+                                v87 = false;
+                                v24 = {};
+                                shouldSwitch = true;
+                                for _, v381 in ipairs(v372) do
+                                    for _, v383 in ipairs(l_Players_5:GetPlayers()) do
+                                        local v384 = v383.Name:lower();
+                                        local v385 = v383.DisplayName:lower();
+                                        if v384:find(v381, 1, true) or v385:find(v381, 1, true) then
+                                            table.insert(v24, v383);
+                                            break;
+                                        end;
+                                    end;
+                                end;
+                            end;
+                        elseif v325:match("^%.lk ([^%s]+) ([^%s]+)$") then
+                            local v386, v387 = v325:match("^%.lk ([^%s]+) ([^%s]+)$");
+                            for _, v389 in pairs(l_Players_5:GetPlayers()) do
+                                local v390 = v389.Name:lower();
+                                local v391 = v389.DisplayName:lower();
+                                if v390:find(v386, 1, true) or v391:find(v386, 1, true) then
+                                    if isProtected(v389) then
+                                        sendMessage("Cannot target user " .. v389.Name .. " because they are premium.");
+                                        return;
+                                    else
+                                        handleOPKillCommand(v386, v387);
+                                        break;
+                                    end;
+                                end;
+                            end;
+                        elseif v325:match("^%.lk ([^%s]+)$") then
+                            local v392 = v325:match("^%.lk ([^%s]+)$");
+                            for _, v394 in pairs(l_Players_5:GetPlayers()) do
+                                local v395 = v394.Name:lower();
+                                local v396 = v394.DisplayName:lower();
+                                if v395:find(v392, 1, true) or v396:find(v392, 1, true) then
+                                    if isProtected(v394) then
+                                        sendMessage("Cannot target user " .. v394.Name .. " because they are premium.");
+                                        return;
+                                    else
+                                        handleOPKillCommand(v392);
+                                        break;
+                                    end;
+                                end;
+                            end;
+                        elseif v325:match("^%.s ([^%s]+) ([^%s]+)$") then
+                            local v397, v398 = v325:match("^%.s ([^%s]+) ([^%s]+)$");
+                            for _, v400 in pairs(l_Players_5:GetPlayers()) do
+                                local v401 = v400.Name:lower();
+                                local v402 = v400.DisplayName:lower();
+                                if v401:find(v397, 1, true) or v402:find(v397, 1, true) then
+                                    if isProtected(v400) then
+                                        sendMessage("Cannot target user " .. v400.Name .. " because they are premium.");
+                                        return;
+                                    else
+                                        handleStompCommand(v397, v398);
+                                        break;
+                                    end;
+                                end;
+                            end;
+                        elseif v325:match("^%.s ([^%s]+)$") then
+                            local v403 = v325:match("^%.s ([^%s]+)$");
+                            for _, v405 in pairs(l_Players_5:GetPlayers()) do
+                                local v406 = v405.Name:lower();
+                                local v407 = v405.DisplayName:lower();
+                                if v406:find(v403, 1, true) or v407:find(v403, 1, true) then
+                                    if isProtected(v405) then
+                                        sendMessage("Cannot target user " .. v405.Name .. " because they are premium.");
+                                        return;
+                                    else
+                                        handleStompCommand(v403);
+                                        break;
+                                    end;
+                                end;
+                            end;
+                        elseif v325:match("^%.b ([^%s]+) ([^%s]+)$") then
+                            local v408, v409 = v325:match("^%.b ([^%s]+) ([^%s]+)$");
+                            for _, v411 in pairs(l_Players_5:GetPlayers()) do
+                                local v412 = v411.Name:lower();
+                                local v413 = v411.DisplayName:lower();
+                                if v412:find(v408, 1, true) or v413:find(v408, 1, true) then
+                                    if isProtected(v411) then
+                                        sendMessage("Cannot target user " .. v411.Name .. " because they are premium.");
+                                        return;
+                                    else
+                                        handleBringCommand(v408, v409, v322.Name);
+                                        break;
+                                    end;
+                                end;
+                            end;
+                        elseif v325:match("^%.b ([^%s]+)$") then
+                            local v414 = v325:match("^%.b ([^%s]+)$");
+                            for _, v416 in pairs(l_Players_5:GetPlayers()) do
+                                local v417 = v416.Name:lower();
+                                local v418 = v416.DisplayName:lower();
+                                if v417:find(v414, 1, true) or v418:find(v414, 1, true) then
+                                    if isProtected(v416) then
+                                        sendMessage("Cannot target user " .. v416.Name .. " because they are premium.");
+                                        return;
+                                    else
+                                        handleBringCommand(v414, nil, v322.Name);
+                                        break;
+                                    end;
+                                end;
+                            end;
+                        elseif v325:match("^%.t ([^%s]+) ([^%s]+)$") then
+                            local v419, v420 = v325:match("^%.t ([^%s]+) ([^%s]+)$");
+                            for _, v422 in pairs(l_Players_5:GetPlayers()) do
+                                local v423 = v422.Name:lower();
+                                local v424 = v422.DisplayName:lower();
+                                if v423:find(v419, 1, true) or v424:find(v419, 1, true) then
+                                    if isProtected(v422) then
+                                        sendMessage("Cannot target user " .. v422.Name .. " because they are premium.");
+                                        return;
+                                    else
+                                        handleTakeCommand(v419, v420);
+                                        break;
+                                    end;
+                                end;
+                            end;
+                        elseif v325:match("^%.goto ([^%s]+)$") then
+                            local v425 = v325:match("^%.goto ([^%s]+)$");
+                            handleGotoCommand(v322.Name, v425);
+                        elseif v325:match("^%.d ([^%s]+) ([^%s]+)$") then
+                            local v426, v427 = v325:match("^%.d ([^%s]+) ([^%s]+)$");
+                            for _, v429 in pairs(l_Players_5:GetPlayers()) do
+                                local v430 = v429.Name:lower();
+                                local v431 = v429.DisplayName:lower();
+                                if v430:find(targetName, 1, true) or v431:find(targetName, 1, true) then
+                                    if isProtected(v429) then
+                                        sendMessage("Cannot target user " .. v429.Name .. " because they are premium.");
+                                        return;
+                                    else
+                                        handleDownCommand(v426, v427);
+                                        break;
+                                    end;
+                                end;
+                            end;
+                        elseif v325:match("^%.d ([^%s]+)$") then
+                            local v432 = v325:match("^%.d ([^%s]+)$");
+                            for _, v434 in pairs(l_Players_5:GetPlayers()) do
+                                local v435 = v434.Name:lower();
+                                local v436 = v434.DisplayName:lower();
+                                if v435:find(v432, 1, true) or v436:find(v432, 1, true) then
+                                    if isProtected(v434) then
+                                        sendMessage("Cannot target user " .. v434.Name .. " because they are premium.");
+                                        return;
+                                    else
+                                        handleDownCommand(v432);
+                                        break;
+                                    end;
+                                end;
+                            end;
+                        elseif v325:match("^%.whitelist (.+)$") then
+                            if v322.Name ~= Owner then
+                                return;
+                            else
+                                local v437 = v325:match("^%.whitelist (.+)$");
+                                for _, v439 in pairs(game:GetService("Players"):GetPlayers()) do
+                                    local v440 = v439.Name:lower();
+                                    local v441 = v439.DisplayName:lower();
+                                    if v440:find(v437, 1, true) or v441:find(v437, 1, true) then
+                                        local l_Name_3 = v439.Name;
+                                        v213[l_Name_3] = true;
+                                        local l_FirstChild_3 = game.Players:FindFirstChild(l_Name_3);
+                                        if l_FirstChild_3 then
+                                            setupChatListener(l_FirstChild_3);
+                                            break;
+                                        else
+                                            break;
+                                        end;
+                                    end;
+                                end;
+                            end;
+                        elseif v325:match("^%.unwhitelist (.+)$") then
+                            if v322.Name ~= Owner then
+                                return;
+                            else
+                                local v444 = v325:match("^%.unwhitelist (.+)$");
+                                for _, v446 in pairs(game:GetService("Players"):GetPlayers()) do
+                                    local v447 = v446.Name:lower();
+                                    local v448 = v446.DisplayName:lower();
+                                    if v447:find(v444, 1, true) or v448:find(v444, 1, true) then
+                                        local _ = v446.Name;
+                                        v213[v446.Name] = nil;
+                                        v214[v446.UserId] = nil;
+                                        break;
+                                    end;
+                                end;
+                            end;
+                        end;
+                    end;
+                    return;
+                end;
+            end;
+            return;
+        end;
     end;
     l_TextChatService_1.OnIncomingMessage = function(v450) --[[ Line: 0 ]] --[[ Name:  ]]
         -- upvalues: v214 (ref)
@@ -1363,12 +1823,12 @@ else
             if isAuthorized(v454) then
                 v213[v454.Name] = true;
             end;
-            pcall(function() setupChatListener(v454); end);
+            setupChatListener(v454);
         end;
     end;
     l_Players_5.PlayerAdded:Connect(function(v455) --[[ Line: 0 ]] --[[ Name:  ]]
         if isAuthorized(v455) or isPremium(v455) or isBypassPremium(v455) or isStarBypassPremium(v455) then
-            pcall(function() setupChatListener(v455); end);
+            setupChatListener(v455);
         end;
     end);
     local l_Players_6 = game:GetService("Players");
@@ -1581,7 +2041,7 @@ else
                         reloadTool();
                     end;
                 end;
-                pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Stomp"); end);
+                l_ReplicatedStorage_0.MainEvent:FireServer("Stomp");
             end;
             task.wait();
         end;
@@ -1621,7 +2081,7 @@ else
                         v87 = false;
                     end;
                 end;
-                pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Stomp"); end);
+                l_ReplicatedStorage_0.MainEvent:FireServer("Stomp");
             end;
             task.wait();
         end;
@@ -1679,7 +2139,7 @@ else
                         l_HumanoidRootPart_13.AssemblyLinearVelocity = Vector3.zero;
                         l_HumanoidRootPart_13.AssemblyAngularVelocity = Vector3.zero;
                         l_HumanoidRootPart_13.CFrame = CFrame.new(v497.Position + Vector3.new(0, 3, 0));
-                        pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false); end);
+                        l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false);
                         task.wait(0.4);
                     else
                         v22 = true;
@@ -1690,7 +2150,7 @@ else
                         teleportToTarget(commandSender);
                         task.wait(1);
                         teleportToTarget(commandSender);
-                        pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false); end);
+                        l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false);
                         task.wait(1);
                         v87 = true;
                         reloadTool();
@@ -1753,7 +2213,7 @@ else
                         l_HumanoidRootPart_14.AssemblyLinearVelocity = Vector3.zero;
                         l_HumanoidRootPart_14.AssemblyAngularVelocity = Vector3.zero;
                         l_HumanoidRootPart_14.CFrame = CFrame.new(v509.Position + Vector3.new(0, 3, 0));
-                        pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false); end);
+                        l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false);
                         task.wait(0.4);
                     else
                         v22 = true;
@@ -1767,7 +2227,7 @@ else
                             v513.CFrame = v156;
                             task.wait(1);
                             v513.CFrame = v156;
-                            pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false); end);
+                            l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false);
                             task.wait(1);
                             v156 = nil;
                             v155 = nil;
@@ -1783,7 +2243,7 @@ else
                                 teleportToPosition(l_Position_4);
                                 task.wait(1);
                                 teleportToPosition(l_Position_4);
-                                pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false); end);
+                                l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false);
                                 task.wait(1);
                                 v87 = true;
                                 reloadTool();
@@ -1865,7 +2325,7 @@ else
                 for _, v535 in ipairs(l_Character_33:GetChildren()) do
                     if v535:IsA("Tool") and v535:FindFirstChild("Handle") then
                         local l_Handle_0 = v535.Handle;
-                        pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("ShootGun", l_Handle_0, l_Handle_0.Position, l_Head_0.Position, l_Head_0, Vector3.new(0, 0, 0)); end);
+                        l_ReplicatedStorage_0.MainEvent:FireServer("ShootGun", l_Handle_0, l_Handle_0.Position, l_Head_0.Position, l_Head_0, Vector3.new(0, 0, 0));
                     end;
                 end;
                 return;
@@ -1889,11 +2349,9 @@ else
                     end;
                 end;
                 if v539 and v539.Character and v539.Character:FindFirstChild("Head") then
-                    if l_LocalPlayer_22 and l_LocalPlayer_22.Character then
-                        for _, v544 in pairs(l_LocalPlayer_22.Character:GetChildren()) do
-                            if v544:IsA("Tool") and v544:FindFirstChild("Handle") then
-                                pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("ShootGun", v544.Handle, v544.Handle.Position, v539.Character.Head.Position, v539.Character.Head, Vector3.new(0, 0, 0)); end);
-                            end;
+                    for _, v544 in pairs(l_LocalPlayer_22.Character:GetChildren()) do
+                        if v544:IsA("Tool") and v544:FindFirstChild("Handle") then
+                            l_ReplicatedStorage_0.MainEvent:FireServer("ShootGun", v544.Handle, v544.Handle.Position, v539.Character.Head.Position, v539.Character.Head, Vector3.new(0, 0, 0));
                         end;
                     end;
                 end;
@@ -2047,7 +2505,7 @@ else
             if v546 then
                 for _, v585 in ipairs(v546:GetChildren()) do
                     if v585:IsA("Tool") and v585:FindFirstChild("Ammo") and v585:FindFirstChild("Ammo").Value <= 0 then
-                        pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Reload", v585); end);
+                        l_ReplicatedStorage_0.MainEvent:FireServer("Reload", v585);
                     end;
                 end;
             end;
@@ -2064,7 +2522,7 @@ else
                 end;
             end;
             if v23 then
-                pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("DropMoney", "15000"); end);
+                l_ReplicatedStorage_0.MainEvent:FireServer("DropMoney", "15000");
             end;
             if l_Humanoid_3 and v582 and v582.Value == true then
                 l_Humanoid_3.Health = 0;
@@ -2086,7 +2544,7 @@ else
                 end;
             end;
             if getgenv().enabled1 then
-                local l_l_Players_7_FirstChild_0 = pcall(function() return l_Players_7:FindFirstChild(Owner); end) and l_Players_7:FindFirstChild(Owner) or nil;
+                local l_l_Players_7_FirstChild_0 = l_Players_7:FindFirstChild(Owner);
                 if l_l_Players_7_FirstChild_0 then
                     local l_Character_36 = l_l_Players_7_FirstChild_0.Character;
                     if l_Character_36 then
@@ -2095,26 +2553,24 @@ else
                         local l_Humanoid_4 = l_Character_36:FindFirstChildOfClass("Humanoid");
                         if l_BodyEffects_8 and v597 and l_Humanoid_4 then
                             local l_Health_0 = l_Humanoid_4.Health;
-                            if pcall(function() return getgenv().lastHealths[Owner]; end) then
-                                if getgenv().lastHealths[Owner] == nil then
-                                    getgenv().lastHealths[Owner] = l_Health_0;
-                                end;
-                                if l_Health_0 + 0.05 < getgenv().lastHealths[Owner] then
-                                    getgenv().lastHealths[Owner] = l_Health_0;
-                                    task.wait(0.1);
-                                    local l_LastDamager_0 = l_Character_36:FindFirstChild("BodyEffects"):FindFirstChild("LastDamager");
-                                    local v601 = l_LastDamager_0 and tostring(l_LastDamager_0.Value);
-                                    if v601 ~= "" then
-                                        local l_l_Players_7_FirstChild_1 = l_Players_7:FindFirstChild(v601);
-                                        if l_l_Players_7_FirstChild_1 then
-                                            v17 = l_l_Players_7_FirstChild_1;
-                                            v22 = true;
-                                            v87 = false;
-                                        end;
+                            if getgenv().lastHealths[Owner] == nil then
+                                getgenv().lastHealths[Owner] = l_Health_0;
+                            end;
+                            if l_Health_0 + 0.05 < getgenv().lastHealths[Owner] then
+                                getgenv().lastHealths[Owner] = l_Health_0;
+                                task.wait(0.1);
+                                local l_LastDamager_0 = l_Character_36:FindFirstChild("BodyEffects"):FindFirstChild("LastDamager");
+                                local v601 = l_LastDamager_0 and tostring(l_LastDamager_0.Value);
+                                if v601 ~= "" then
+                                    local l_l_Players_7_FirstChild_1 = l_Players_7:FindFirstChild(v601);
+                                    if l_l_Players_7_FirstChild_1 then
+                                        v17 = l_l_Players_7_FirstChild_1;
+                                        v22 = true;
+                                        v87 = false;
                                     end;
-                                else
-                                    getgenv().lastHealths[Owner] = l_Health_0;
                                 end;
+                            else
+                                getgenv().lastHealths[Owner] = l_Health_0;
                             end;
                             if v17 and v17.Character then
                                 local l_BodyEffects_9 = v17.Character:FindFirstChild("BodyEffects");
@@ -2295,5 +2751,4 @@ else
         end);
     end;
     return;
-    end);
 end;
