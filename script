@@ -1030,7 +1030,7 @@ else
                                                                             v247 = true
                                                                         end
                                                                         if not v247 then
-                                                                            if v255 == ".flame" then
+                                                                            if v255:match("^%.flame") then
                                                                                 task.spawn(function()
                                                                                     pcall(function()
                                                                                         local ignored = workspace:FindFirstChild("Ignored")
