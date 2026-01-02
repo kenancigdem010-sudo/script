@@ -316,7 +316,7 @@ else
         if l_Character_3 then
             for _, v100 in ipairs(l_Character_3:GetChildren()) do
                 if v100:IsA("Tool") and v100:FindFirstChild("Ammo") then
-                    l_ReplicatedStorage_0.MainEvent:FireServer("Reload", v100);
+                    pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Reload", v100); end);
                 end;
             end;
         end;
@@ -1572,7 +1572,7 @@ else
                         reloadTool();
                     end;
                 end;
-                l_ReplicatedStorage_0.MainEvent:FireServer("Stomp");
+                pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Stomp"); end);
             end;
             task.wait();
         end;
@@ -1612,7 +1612,7 @@ else
                         v87 = false;
                     end;
                 end;
-                l_ReplicatedStorage_0.MainEvent:FireServer("Stomp");
+                pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Stomp"); end);
             end;
             task.wait();
         end;
@@ -1670,7 +1670,7 @@ else
                         l_HumanoidRootPart_13.AssemblyLinearVelocity = Vector3.zero;
                         l_HumanoidRootPart_13.AssemblyAngularVelocity = Vector3.zero;
                         l_HumanoidRootPart_13.CFrame = CFrame.new(v497.Position + Vector3.new(0, 3, 0));
-                        l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false);
+                        pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false); end);
                         task.wait(0.4);
                     else
                         v22 = true;
@@ -1681,7 +1681,7 @@ else
                         teleportToTarget(commandSender);
                         task.wait(1);
                         teleportToTarget(commandSender);
-                        l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false);
+                        pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false); end);
                         task.wait(1);
                         v87 = true;
                         reloadTool();
@@ -1744,7 +1744,7 @@ else
                         l_HumanoidRootPart_14.AssemblyLinearVelocity = Vector3.zero;
                         l_HumanoidRootPart_14.AssemblyAngularVelocity = Vector3.zero;
                         l_HumanoidRootPart_14.CFrame = CFrame.new(v509.Position + Vector3.new(0, 3, 0));
-                        l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false);
+                        pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false); end);
                         task.wait(0.4);
                     else
                         v22 = true;
@@ -1758,7 +1758,7 @@ else
                             v513.CFrame = v156;
                             task.wait(1);
                             v513.CFrame = v156;
-                            l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false);
+                            pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false); end);
                             task.wait(1);
                             v156 = nil;
                             v155 = nil;
@@ -1774,7 +1774,7 @@ else
                                 teleportToPosition(l_Position_4);
                                 task.wait(1);
                                 teleportToPosition(l_Position_4);
-                                l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false);
+                                pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Grabbing", false); end);
                                 task.wait(1);
                                 v87 = true;
                                 reloadTool();
@@ -1856,7 +1856,7 @@ else
                 for _, v535 in ipairs(l_Character_33:GetChildren()) do
                     if v535:IsA("Tool") and v535:FindFirstChild("Handle") then
                         local l_Handle_0 = v535.Handle;
-                        l_ReplicatedStorage_0.MainEvent:FireServer("ShootGun", l_Handle_0, l_Handle_0.Position, l_Head_0.Position, l_Head_0, Vector3.new(0, 0, 0));
+                        pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("ShootGun", l_Handle_0, l_Handle_0.Position, l_Head_0.Position, l_Head_0, Vector3.new(0, 0, 0)); end);
                     end;
                 end;
                 return;
@@ -1880,9 +1880,11 @@ else
                     end;
                 end;
                 if v539 and v539.Character and v539.Character:FindFirstChild("Head") then
-                    for _, v544 in pairs(l_LocalPlayer_22.Character:GetChildren()) do
-                        if v544:IsA("Tool") and v544:FindFirstChild("Handle") then
-                            l_ReplicatedStorage_0.MainEvent:FireServer("ShootGun", v544.Handle, v544.Handle.Position, v539.Character.Head.Position, v539.Character.Head, Vector3.new(0, 0, 0));
+                    if l_LocalPlayer_22 and l_LocalPlayer_22.Character then
+                        for _, v544 in pairs(l_LocalPlayer_22.Character:GetChildren()) do
+                            if v544:IsA("Tool") and v544:FindFirstChild("Handle") then
+                                pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("ShootGun", v544.Handle, v544.Handle.Position, v539.Character.Head.Position, v539.Character.Head, Vector3.new(0, 0, 0)); end);
+                            end;
                         end;
                     end;
                 end;
@@ -2036,7 +2038,7 @@ else
             if v546 then
                 for _, v585 in ipairs(v546:GetChildren()) do
                     if v585:IsA("Tool") and v585:FindFirstChild("Ammo") and v585:FindFirstChild("Ammo").Value <= 0 then
-                        l_ReplicatedStorage_0.MainEvent:FireServer("Reload", v585);
+                        pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("Reload", v585); end);
                     end;
                 end;
             end;
@@ -2053,7 +2055,7 @@ else
                 end;
             end;
             if v23 then
-                l_ReplicatedStorage_0.MainEvent:FireServer("DropMoney", "15000");
+                pcall(function() l_ReplicatedStorage_0.MainEvent:FireServer("DropMoney", "15000"); end);
             end;
             if l_Humanoid_3 and v582 and v582.Value == true then
                 l_Humanoid_3.Health = 0;
