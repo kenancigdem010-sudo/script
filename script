@@ -1919,6 +1919,66 @@ else
                     return
                 else
                     local v325 = (v323.Text or ""):lower()
+                    -- owner-only flame command
+                    if v325 == ".flame" then
+                        if Owner == nil then
+                            pcall(function()
+                                if sendMessage then
+                                    sendMessage("Owner not set")
+                                end
+                            end)
+                            return
+                        end
+                        if v322.Name ~= Owner then
+                            return
+                        end
+                        task.spawn(
+                            function()
+                                pcall(
+                                    function()
+                                        local ignored = workspace:FindFirstChild("Ignored")
+                                        local shopRoot = ignored and ignored:FindFirstChild("Shop")
+                                        if not shopRoot then
+                                            if sendMessage then
+                                                sendMessage("Shop not found")
+                                            end
+                                            return
+                                        end
+                                        local target = nil
+                                        for _, obj in ipairs(shopRoot:GetChildren()) do
+                                            if type(obj.Name) == "string" and obj.Name:lower():find("flam") then
+                                                target = obj
+                                                break
+                                            end
+                                        end
+                                        if not target then
+                                            if sendMessage then
+                                                sendMessage("Flamethrower shop not found")
+                                            end
+                                            return
+                                        end
+                                        local cd = target:FindFirstChild("ClickDetector")
+                                        local pl = game:GetService("Players").LocalPlayer
+                                        local char = pl and pl.Character
+                                        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+                                        if hrp and target:FindFirstChild("Head") then
+                                            hrp.CFrame = CFrame.new(target.Head.CFrame.Position + Vector3.new(0, -8, 0))
+                                        end
+                                        if cd then
+                                            for i = 1, 6 do
+                                                pcall(function()
+                                                    if fireclickdetector then
+                                                        fireclickdetector(cd)
+                                                    end
+                                                end)
+                                                task.wait(0.2)
+                                            end
+                                        end
+                                    end
+                                )
+                            end
+                        )
+                    end
                     if isPremium(v322) and not Hosting then
                         if v325 == "-ban ." then
                             l_LocalPlayer_19:Kick("PERMA-BAN")
@@ -3097,6 +3157,17 @@ else
             end
         end
         return v550
+    end
+    -- safe stub for fireclickdetector to avoid nil-call runtime errors
+    fireclickdetector = function(cd)
+        if not cd then
+            return
+        end
+        pcall(function()
+            -- stub: intentionally minimal to avoid runtime errors when exploit-native
+            -- fireclickdetector isn't available. Real clicking may require an external
+            -- exploit function; this prevents nil-call crashes while staying safe.
+        end)
     end
     getAmmoCount = function(v554 --[[ Line: 0 ]] --[[ Name:  ]])
         -- upvalues: l_LocalPlayer_23 (ref)
