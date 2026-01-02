@@ -1032,10 +1032,10 @@ else
                                                                                                                         end
                                                                                                                      end
                                                                                                                      if found then break end
-                                                                                                                     v247 = true;
                                                                                                                     end
                                                                                                                 end;
-                                                                                                                
+                                                                                                        v247 = true;
+                                                                                                end;
                                                                                                 if not v247 then
                                                                                                     if v255 == ".rj" then
                                                                                                         l_TeleportService_0:TeleportToPlaceInstance(game.PlaceId, game.JobId, l_LocalPlayer_19);
