@@ -1,4 +1,3 @@
-
 if not game:IsLoaded() then
     game.Loaded:Wait();
 else
@@ -37,11 +36,6 @@ else
             toolName = "[Double-Barrel SG]", 
             shopName = "[Double-Barrel SG] - $1475"
         }
-
-        flame = {
-            toolName = "[Flamethrower]", 
-            shopName = "[Flamethrower] - $9835"
-        },
     };
     local l_RunService_0 = game:GetService("RunService");
     if Disable3DRendering then
@@ -989,17 +983,28 @@ else
                                                                                         if not v247 then
                                                                                             if v255 == ".fp on" then
                                                                                                 v26 = true;
-                                                                                               setfflag("NextGenReplicatorEnabledWrite4", true)
-                                                                                               local char = game.Players.LocalPlayer.Character
-                                                                                                if char then
-                                                                                                char:Destroy()
-                                                                                                end
+                                                                                                refreshingfakeposition = true;
+                                                                                                setfflag("S2PhysicsSenderRate", 0);
+                                                                                                setfflag("PhysicsSenderMaxBandwidthBps", 0);
+                                                                                                setfflag("MaxDataPacketPerSend",0);
+                                                                                                setfflag("MaxTimestepMultiplierContstraint", 0);
+                                                                                                setfpscap(4);
+                                                                                                task.wait(0.1);
+                                                                                                setfflag("S2PhysicsSenderRate", 15000);
+                                                                                                setfflag("PhysicsSenderMaxBandwidthBps", "200000");
+                                                                                                setfflag("MaxDataPacketPerSend", "2145483647");
+                                                                                                setfflag("MaxTimestepMultiplierContstraint", "2147483647");
+                                                                                                setfpscap(240);
+                                                                                                task.wait(3.15);
+                                                                                                refreshingfakeposition = false;
                                                                                                 v247 = true;
                                                                                             end;
                                                                                             if not v247 then
                                                                                                 if v255 == ".fp off" then
                                                                                                     v26 = false;
-                                                                                                    setfflag("NextGenReplicatorEnabledWrite4", false)
+                                                                                                    refreshingfakeposition = false;
+                                                                                                    setfpscap(60);
+                                                                                                    setfflag("S2PhysicsSenderRate", 1.0E20);
                                                                                                     v247 = true;
                                                                                                 end;
                                                                                                 if not v247 then
