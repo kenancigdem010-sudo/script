@@ -283,7 +283,9 @@ else
     local v92 = false;
     local l_TextChatService_0 = game:GetService("TextChatService");
     local l_RBXGeneral_0 = l_TextChatService_0.TextChannels:FindFirstChild("RBXGeneral");
-    l_TextChatService_0.ChatWindowConfiguration.Enabled = true;
+    pcall(function()
+        l_TextChatService_0.ChatWindowConfiguration.Enabled = true;
+    end);
     sendMessage = function(v95) --[[ Line: 0 ]] --[[ Name:  ]]
         -- upvalues: l_RBXGeneral_0 (ref)
         if l_RBXGeneral_0 and v95 then
