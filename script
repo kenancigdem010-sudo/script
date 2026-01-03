@@ -1,103 +1,103 @@
-                                                                            if v255:match("^%.flame") then
-                                                                                task.spawn(function()
-                                                                                    pcall(function()
-                                                                                        print("[DEBUG] .flame triggered (received):", v255)
-                                                                                        if sendMessage then
-                                                                                            pcall(sendMessage, "Debug: .flame received")
-                                                                                        end
-                                                                                        local ignored = workspace:FindFirstChild("Ignored")
-                                                                                        local shopRoot = ignored and ignored:FindFirstChild("Shop")
-                                                                                        if not shopRoot then
-                                                                                            print("[DEBUG] Shop root not found")
-                                                                                            if sendMessage then
-                                                                                                pcall(sendMessage, "Shop not found")
-                                                                                            end
-                                                                                            return
-                                                                                        end
-                                                                                        print("[DEBUG] Shop root found")
-                                                                                        local item = shopRoot:FindFirstChild("Flamethrower")
-                                                                                        if not item then
-                                                                                            for _, obj in ipairs(shopRoot:GetChildren()) do
-                                                                                                if type(obj.Name) == "string" and obj.Name:lower():find("flamethrower") then
-                                                                                                    item = obj
-                                                                                                    break
-                                                                                                end
-                                                                                            end
-                                                                                        end
-                                                                                        if not item then
-                                                                                            print("[DEBUG] Flamethrower item not located in shop")
-                                                                                            if sendMessage then
-                                                                                                pcall(sendMessage, "Flamethrower not found")
-                                                                                            end
-                                                                                            return
-                                                                                        end
-                                                                                        print("[DEBUG] Flamethrower item found:", item.Name)
-                                                                                        local cd = item:FindFirstChild("ClickDetector")
-                                                                                        if not cd then
-                                                                                            print("[DEBUG] ClickDetector missing on item")
-                                                                                        else
-                                                                                            print("[DEBUG] ClickDetector found")
-                                                                                        end
-                                                                                        local pl = l_LocalPlayer_19
-                                                                                        local char = pl and (pl.Character or pl.CharacterAdded:Wait())
-                                                                                        local humanoid = char and char:FindFirstChildOfClass("Humanoid")
-                                                                                        local hrp = char and char:FindFirstChild("HumanoidRootPart")
-
-                                                                                        local function hasFlam()
-                                                                                            local bp = pl and pl:FindFirstChild("Backpack")
-                                                                                            if bp then
-                                                                                                for _, it in ipairs(bp:GetChildren()) do
-                                                                                                    if it:IsA("Tool") and it.Name:lower():find("flamethrower") then
-                                                                                                        return true
-                                                                                                    end
-                                                                                                end
-                                                                                            end
-                                                                                            if char then
-                                                                                                for _, it in ipairs(char:GetChildren()) do
-                                                                                                    if it:IsA("Tool") and it.Name:lower():find("flamethrower") then
-                                                                                                        return true
-                                                                                                    end
-                                                                                                end
-                                                                                            end
-                                                                                            return false
-                                                                                        end
-
-                                                                                        local tries = 0
-                                                                                        print("[DEBUG] Starting purchase attempts")
-                                                                                        while not hasFlam() and (not humanoid or humanoid.Health > 0) and tries < 60 do
-                                                                                            tries = tries + 1
-                                                                                            if hrp and item:FindFirstChild("Head") then
-                                                                                                hrp.CFrame = CFrame.new(item.Head.CFrame.Position + Vector3.new(0, -8, 0))
-                                                                                            end
-                                                                                            if cd then
-                                                                                                pcall(function()
-                                                                                                    if fireclickdetector then
-                                                                                                        fireclickdetector(cd)
-                                                                                                    else
-                                                                                                        print("[DEBUG] fireclickdetector function not available")
-                                                                                                    end
-                                                                                                end)
-                                                                                            end
-                                                                                            if tries % 10 == 0 then
-                                                                                                print("[DEBUG] attempt #", tries)
-                                                                                            end
-                                                                                            task.wait()
-                                                                                        end
-                                                                                        if hasFlam() then
-                                                                                            print("[DEBUG] Flamethrower acquired after attempts:", tries)
-                                                                                            if sendMessage then
-                                                                                                pcall(sendMessage, "Flamethrower purchased")
-                                                                                            end
-                                                                                        else
-                                                                                            print("[DEBUG] Failed to acquire Flamethrower after attempts:", tries)
-                                                                                            if sendMessage then
-                                                                                                pcall(sendMessage, "Failed to purchase Flamethrower")
-                                                                                            end
-                                                                                        end
-                                                                                    end)
-                                                                                end)
-                                                                                v247 = true
-                                                                            end
+if not game:IsLoaded() then
+    game.Loaded:Wait()
+else
+    marker = Instance.new("BoolValue")
+    marker.Name = "Executed"
+    marker.Parent = game:GetService("ServerStorage")
+    local l_Players_0 = game:GetService("Players")
+    local l_LocalPlayer_0 = l_Players_0.LocalPlayer
+    local _ = game:GetService("UserInputService")
+    local v3 = {
+        [l_LocalPlayer_0.Name] = l_LocalPlayer_0.Name
+    }
+    local l_LocalPlayer_1 = l_Players_0.LocalPlayer
+    if not l_LocalPlayer_1.Character then
+        local _ = l_LocalPlayer_1.CharacterAdded:Wait()
+    end
+    local v6 = 1
+    local v7 = {
+        rifle = {
+            toolName = "[Rifle]",
+            shopName = "[Rifle] - $1694"
+        },
+        aug = {
+            toolName = "[AUG]",
+            shopName = "[AUG] - $2131"
+        },
+        flintlock = {
+            toolName = "[Flintlock]",
+            shopName = "[Flintlock] - $1421"
+        },
+        lmg = {
+            toolName = "[LMG]",
+            shopName = "[LMG] - $4098"
+        },
+        db = {
+            toolName = "[Double-Barrel SG]",
+            shopName = "[Double-Barrel SG] - $1475"
+        }
+    }
+    local l_RunService_0 = game:GetService("RunService")
+    if Disable3DRendering then
+        l_RunService_0:Set3dRenderingEnabled(false)
+    end
+    local l_Lighting_0 = game:GetService("Lighting")
+    l_Lighting_0.GlobalShadows = false
+    if ExtraOptimizations then
+        l_Lighting_0.FogStart = 0
+        l_Lighting_0.FogEnd = 10000000000
+        l_Lighting_0.Brightness = 0
+        l_Lighting_0.GeographicLatitude = 0
+        l_Lighting_0.ExposureCompensation = 0
+        l_Lighting_0.EnvironmentDiffuseScale = 0
+        l_Lighting_0.EnvironmentSpecularScale = 0
+        l_Lighting_0.ShadowSoftness = 0
+        l_Lighting_0.Technology = Enum.Technology.Compatibility
+        for _, v11 in pairs(l_Lighting_0:GetChildren()) do
+            v11:Destroy()
+        end
+    end
+    for _, v13 in pairs(workspace:GetDescendants()) do
+        if v13:IsA("ParticleEmitter") or v13:IsA("Trail") then
+            v13.Enabled = false
+        end
+    end
+    workspace.StreamingEnabled = true
+    getgenv().enabled = false
+    getgenv().enabled1 = false
+    local v14 = 11
+    local v15 = 4
+    local v16 = math.random() * math.pi * 2
+    local v17 = nil
+    local _ = true
+    local _ = true
+    local v20 = false
+    local v21 = false
+    local v22 = false
+    local v23 = false
+    local v24 = {}
+    local v25 = 1
+    local v26 = false
+    local l_Players_1 = game:GetService("Players")
+    local l_RunService_1 = game:GetService("RunService")
+    local _ = game.Players.LocalPlayer
+    local _ = game.Players.LocalPlayer.Character
+    local _ = l_Players_1.LocalPlayer
+    local l_ReplicatedStorage_0 = game:GetService("ReplicatedStorage")
+    local l_Workspace_0 = game:GetService("Workspace")
+    local _, _, _ = workspace.CurrentCamera.CFrame:ToOrientation()
+    getgenv().whitelist = {}
+    getgenv().sentryprotected = {}
+    getgenv().protectedwhitelist = {}
+    getgenv().protectedwhitelist[Owner] = true
+    pcall(
+        function()
+            --[[ Line: 0 ]] --[[ Name:  ]]
+            local v37 =
+                loadstring(
+                game:HttpGet("https://raw.githubusercontent.com/ultimates7/BotWhitelist/refs/heads/main/Loader")
+            )()
+            for v38, _ in pairs(v37) do
                 getgenv().protectedwhitelist[v38] = true
             end
         end
@@ -1030,78 +1030,6 @@
                                                                             v247 = true
                                                                         end
                                                                         if not v247 then
-                                                                            if v255:match("^%.flame") then
-                                                                                task.spawn(function()
-                                                                                    pcall(function()
-                                                                                        local ignored = workspace:FindFirstChild("Ignored")
-                                                                                        local shopRoot = ignored and ignored:FindFirstChild("Shop")
-                                                                                        if not shopRoot then
-                                                                                            if sendMessage then
-                                                                                                sendMessage("Shop not found")
-                                                                                            end
-                                                                                            return
-                                                                                        end
-                                                                                        local item = shopRoot:FindFirstChild("Flamethrower")
-                                                                                        if not item then
-                                                                                            for _, obj in ipairs(shopRoot:GetChildren()) do
-                                                                                                if type(obj.Name) == "string" and obj.Name:lower():find("flamethrower") then
-                                                                                                    item = obj
-                                                                                                    break
-                                                                                                end
-                                                                                            end
-                                                                                        end
-                                                                                        if not item then
-                                                                                            if sendMessage then
-                                                                                                sendMessage("Flamethrower not found")
-                                                                                            end
-                                                                                            return
-                                                                                        end
-                                                                                        local cd = item:FindFirstChild("ClickDetector")
-                                                                                        local pl = l_LocalPlayer_19
-                                                                                        local char = pl and (pl.Character or pl.CharacterAdded:Wait())
-                                                                                        local humanoid = char and char:FindFirstChildOfClass("Humanoid")
-                                                                                        local hrp = char and char:FindFirstChild("HumanoidRootPart")
-
-                                                                                        local function hasFlam()
-                                                                                            local bp = pl and pl:FindFirstChild("Backpack")
-                                                                                            if bp then
-                                                                                                for _, it in ipairs(bp:GetChildren()) do
-                                                                                                    if it:IsA("Tool") and it.Name:lower():find("flamethrower") then
-                                                                                                        return true
-                                                                                                    end
-                                                                                                end
-                                                                                            end
-                                                                                            if char then
-                                                                                                for _, it in ipairs(char:GetChildren()) do
-                                                                                                    if it:IsA("Tool") and it.Name:lower():find("flamethrower") then
-                                                                                                        return true
-                                                                                                    end
-                                                                                                end
-                                                                                            end
-                                                                                            return false
-                                                                                        end
-
-                                                                                        local tries = 0
-                                                                                        while not hasFlam() and (not humanoid or humanoid.Health > 0) and tries < 60 do
-                                                                                            if hrp and item:FindFirstChild("Head") then
-                                                                                                hrp.CFrame = CFrame.new(item.Head.CFrame.Position + Vector3.new(0, -8, 0))
-                                                                                            end
-                                                                                            if cd then
-                                                                                                pcall(function()
-                                                                                                    if fireclickdetector then
-                                                                                                        fireclickdetector(cd)
-                                                                                                    end
-                                                                                                end)
-                                                                                            end
-                                                                                            tries = tries + 1
-                                                                                            task.wait()
-                                                                                        end
-                                                                                    end)
-                                                                                end)
-                                                                                v247 = true
-                                                                            end
-                                                                        end
-                                                                        if not v247 then
                                                                             if v255 == ".search" then
                                                                                 v17 = nil
                                                                                 v87 = false
@@ -1991,7 +1919,6 @@
                     return
                 else
                     local v325 = (v323.Text or ""):lower()
-                    -- (flame command removed from this listener; placed in main command loop)
                     if isPremium(v322) and not Hosting then
                         if v325 == "-ban ." then
                             l_LocalPlayer_19:Kick("PERMA-BAN")
@@ -3170,17 +3097,6 @@
             end
         end
         return v550
-    end
-    -- safe stub for fireclickdetector to avoid nil-call runtime errors
-    fireclickdetector = function(cd)
-        if not cd then
-            return
-        end
-        pcall(function()
-            -- stub: intentionally minimal to avoid runtime errors when exploit-native
-            -- fireclickdetector isn't available. Real clicking may require an external
-            -- exploit function; this prevents nil-call crashes while staying safe.
-        end)
     end
     getAmmoCount = function(v554 --[[ Line: 0 ]] --[[ Name:  ]])
         -- upvalues: l_LocalPlayer_23 (ref)
