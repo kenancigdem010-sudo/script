@@ -18,23 +18,23 @@ else
     local v7 = {
         rifle = {
             toolName = "[Rifle]",
-            shopName = "[Rifle] - $1694"
+            shopName = "[Rifle] - $1745"
         },
         aug = {
             toolName = "[AUG]",
-            shopName = "[AUG] - $2131"
+            shopName = "[AUG] - $2195"
         },
         flintlock = {
             toolName = "[Flintlock]",
-            shopName = "[Flintlock] - $1421"
+            shopName = "[Flintlock] - $1463"
         },
         lmg = {
             toolName = "[LMG]",
-            shopName = "[LMG] - $4098"
+            shopName = "[LMG] - $4221"
         },
         db = {
             toolName = "[Double-Barrel SG]",
-            shopName = "[Double-Barrel SG] - $1475"
+            shopName = "[Double-Barrel SG] - $1576"
         }
     }
     local l_RunService_0 = game:GetService("RunService")
